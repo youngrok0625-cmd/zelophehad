@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>슬로브핫의 딸들 — 아홉 그릇</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;900&display=swap" rel="stylesheet">
+<style>
+/* VOICE: 단아하고 조용한 수업 자료 — 이야기는 하나, 그릇은 여럿
+   IDEA: 광야의 장막 앞에 펼친 일곱 개의 그릇 (글 · 그림동화 · 신문 · 사진 · 라디오 · 숏츠 · 단톡방)
+   PICTURE: 손을 맞잡은 다섯 자매와 장막, 그리고 갈아 놓은 밭
+   COLOUR and TYPE: 모래 #e8dcc6 바탕 띠, 장막 먹색 #2a241d, 밭의 올리브 #5f7a3a 하나 / 고운바탕 + Noto Sans KR
+   LAYOUT: 위에 이야기 띠, 그 아래 일곱 탭, 탭마다 '잘 전하는 것 / 놓치는 것' 메모 */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#15120e);--ink:light-dark(#2a241d,#ece4d6);--soft:light-dark(#6b6157,#a99d8d);
+--sand:light-dark(#e8dcc6,#2a231a);--sand2:light-dark(#f4eee3,#1d1913);--line:light-dark(#d8ccb7,#3a3127);
+--olive:light-dark(#5f7a3a,#9fbc72);--tent:light-dark(#4a3b2c,#2a2119);--skin:#d9b394;
+--paper:light-dark(#fbfaf6,#1c1915)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip;word-break:keep-all;overflow-wrap:anywhere}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:"Gowun Batang",serif;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5vw,50px)}h2{font-size:clamp(24px,3vw,32px)}h3{font-size:19px}
+p{margin:0 0 .8em}
+.hero{background:var(--sand)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,48px);align-items:center}
+.ref{color:var(--soft);font-size:15px;margin:10px 0 18px}
+.sum{font-family:"Gowun Batang",serif;font-size:17px}
+.sum em{font-style:normal;color:var(--olive);font-weight:700}
+.heroart{width:100%;aspect-ratio:3/2;display:block;object-fit:cover;border-radius:12px}
+.page img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;border-radius:10px}
+.ph img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.panel img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
+.scene.bgimg{background-size:cover!important;background-position:center!important;justify-content:flex-end;padding-bottom:46px}
+.scene.bgimg .big{text-shadow:0 2px 10px rgba(0,0,0,.75)}.scene.bgimg .small{text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.nph img{width:100%;display:block;filter:grayscale(.9) contrast(1.05)}
+.note{font-size:13px;color:var(--soft)}
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabrow{display:flex;gap:6px;overflow-x:auto;max-width:1180px;margin:0 auto;padding:10px max(5vw,16px)}
+.tabrow a{flex:none;text-decoration:none;color:var(--ink);padding:10px 16px;border-radius:999px;border:1px solid var(--line);min-height:44px;display:flex;align-items:center;font-weight:500}
+.tabrow a[aria-current=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabrow a:focus-visible,button:focus-visible{outline:3px solid var(--olive);outline-offset:2px}
+section.view{display:none}section.view.on{display:block}
+.vhead{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;margin-bottom:22px}
+.vhead p{color:var(--soft);margin:0}
+.memo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px}
+.memo div{background:var(--sand2);border-radius:10px;padding:14px 16px;font-size:15px}
+.memo b{display:block;font-family:"Gowun Batang",serif;font-size:16px;margin-bottom:4px}
+.memo .miss b{color:var(--soft)}
+/* 글 */
+.story{max-width:640px;font-family:"Gowun Batang",serif;font-size:18px;line-height:1.95}
+.story p{margin:0 0 1.1em}.story .say{color:var(--olive);font-weight:700}
+/* 그림동화 */
+.book{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;padding-bottom:8px}
+.page{flex:0 0 min(100%,760px);scroll-snap-align:start;background:var(--sand2);border-radius:14px;padding:16px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:center}
+.page svg{width:100%;aspect-ratio:400/260;display:block;border-radius:10px}
+.page .pt{font-family:"Gowun Batang",serif;font-size:19px;line-height:1.8}
+.page .pn{font-size:13px;color:var(--soft);margin-bottom:6px}
+.bnav{display:flex;gap:10px;margin-top:12px;align-items:center}
+button{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;min-height:44px;padding:0 18px;cursor:pointer}
+button.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* 신문 */
+.paper{background:var(--paper);border:1px solid var(--line);padding:clamp(16px,3vw,32px);font-family:"Noto Serif KR",serif}
+.mast{text-align:center;border-bottom:3px double var(--ink);padding-bottom:10px;margin-bottom:6px}
+.mast .name{font-weight:900;font-size:clamp(34px,6vw,58px);line-height:1}
+.mast .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-family:"Noto Sans KR";font-size:13px;color:var(--soft);border-top:1px solid var(--ink);margin-top:10px;padding-top:6px}
+.hl{font-weight:900;font-size:clamp(26px,4vw,40px);line-height:1.15;margin:16px 0 6px;text-wrap:balance}
+.sub{font-family:"Noto Sans KR";font-size:16px;font-weight:500;color:var(--soft);margin-bottom:14px}
+.pgrid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px}
+.cols{columns:2 240px;column-gap:24px;column-rule:1px solid var(--line);font-family:"Noto Sans KR";font-size:15px;line-height:1.75;text-align:justify}
+.cols p{margin:0 0 .8em}
+.side>div{border-top:2px solid var(--ink);padding-top:8px;margin-bottom:18px;font-family:"Noto Sans KR";font-size:14px}
+.side h4{font-family:"Noto Serif KR";font-size:17px;margin:0 0 6px}
+.side ol{margin:0;padding-left:20px}
+.flow{display:grid;gap:4px}.flow span{display:block;background:var(--sand2);padding:6px 10px;border-radius:6px}
+.flow span:first-child{opacity:.6;text-decoration:line-through}
+/* 사진 */
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
+.ph{background:#fff;padding:10px 10px 14px;box-shadow:0 2px 10px rgba(40,30,20,.14);border-radius:3px;color:#2a241d}
+.ph:nth-child(odd){transform:rotate(-1deg)}.ph:nth-child(even){transform:rotate(1deg)}
+.ph svg{width:100%;aspect-ratio:1;display:block;background:#efe6d6}
+.ph .cap{font-family:"Gowun Batang",serif;font-size:16px;margin-top:8px}
+.ph .how{font-size:13px;color:#6b6157}
+/* 라디오 */
+.script{max-width:760px;font-size:16px}
+.ln{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.ln .who{font-weight:700}.ln.fx{color:var(--soft);font-style:italic;grid-template-columns:minmax(0,1fr)}
+.roles{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}.roles span{background:var(--sand2);padding:4px 10px;border-radius:999px;font-size:14px}
+/* 숏츠 */
+.sgrid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px;align-items:start}
+.phone{width:100%;max-width:300px;aspect-ratio:9/16;background:#0f0d0a;border-radius:28px;border:8px solid #2a241d;position:relative;overflow:hidden;color:#fff}
+.scene.v2{justify-content:flex-start;padding:0;background-size:cover;background-position:center}
+.scene.v2 .tx{position:absolute;left:6%;right:6%;top:7%;z-index:5;text-align:center}
+.scene.v2 .big{font-family:"Noto Sans KR",sans-serif;font-weight:700;font-size:23px;line-height:1.3;color:#fff;text-shadow:-2px -2px 0 #1a1410,2px -2px 0 #1a1410,-2px 2px 0 #1a1410,2px 2px 0 #1a1410,0 3px 0 #1a1410,0 4px 8px rgba(0,0,0,.4)}
+.scene.v2 .small{display:inline-block;margin-top:8px;font-size:12px;background:rgba(26,20,16,.82);color:#fff;padding:3px 9px;border-radius:99px;opacity:1}
+.scene.v2 .tx.low{top:auto;bottom:9%}
+.ly{position:absolute;display:block;will-change:transform}
+.ly img{width:100%;display:block}
+.nm{position:absolute;left:50%;top:-14px;transform:translateX(-50%);font-size:10px;font-weight:700;color:#fff;background:#1a1410;border-radius:99px;padding:1px 6px;white-space:nowrap}
+.burst{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 58%,#f7d36b 0 10deg,#f2b84b 10deg 20deg)}
+@keyframes popUp{0%{transform:translateY(120%)}60%{transform:translateY(-8%)}80%{transform:translateY(3%)}100%{transform:translateY(0)}}
+@keyframes peek{0%{transform:translateY(100%)}100%{transform:translateY(38%)}}
+@keyframes walkIn{0%{transform:translateX(-120%)}100%{transform:translateX(0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5%)}}
+@keyframes faceCut{0%{opacity:0;transform:scale(1.35) rotate(-4deg)}6%{opacity:1;transform:scale(1) rotate(2deg)}10%{transform:rotate(-2deg)}14%{transform:rotate(1deg)}18%{opacity:1}19%,100%{opacity:0}}
+@keyframes faceIn{0%{opacity:0;transform:scale(.4)}70%{opacity:1;transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,-2px)}}
+@keyframes fadeZoom{0%{opacity:0;transform:scale(.92)}30%{opacity:1}100%{opacity:1;transform:scale(1.04)}}
+@keyframes jump{0%,100%{transform:translateY(0)}40%{transform:translateY(-12%)}}
+@keyframes popIn{0%{transform:scale(0)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes zoomPoint{0%{transform:scale(.55)}100%{transform:scale(1.18)}}
+.scene.on .a-pop{animation:popUp .7s cubic-bezier(.3,1.4,.5,1) both}
+.scene.on .a-peek{animation:peek 1.4s .4s ease-out both}
+.scene.on .a-walk{animation:walkIn 3s ease-out both}
+.scene.on .a-walk .ly{animation:bob .38s ease-in-out 8}
+.scene.on .a-face{animation:faceCut 5s linear both}
+.scene.on .a-facein{animation:faceIn .45s ease-out both}
+.scene.on .a-shake{animation:shake .12s linear infinite}
+.scene.on .a-fz{animation:fadeZoom 6.5s ease-out both}
+.scene.on .a-jump{animation:jump .55s ease-in-out .6s infinite}
+.scene.on .a-popin{animation:popIn .5s ease-out both}
+.scene.on .a-point{animation:zoomPoint 2.6s ease-in both}
+.scene.on .a-txt{animation:popIn .4s ease-out both}
+@media(prefers-reduced-motion:reduce){.scene.on [class*="a-"]{animation:none!important}}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:22px;opacity:0;transition:opacity .5s}
+.scene.on{opacity:1}
+.scene svg{width:80%;margin-bottom:14px}
+.scene .big{font-family:"Gowun Batang",serif;font-size:24px;line-height:1.3;font-weight:700}
+.scene .small{font-size:13px;opacity:.85;margin-top:8px}
+.bar{position:absolute;left:10px;right:10px;top:10px;height:3px;background:rgba(255,255,255,.25);border-radius:3px}
+.bar i{display:block;height:100%;width:0;background:#fff;border-radius:3px}
+.time{position:absolute;right:14px;bottom:12px;font-size:12px;opacity:.7}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;background:var(--sand2)}
+td.t{white-space:nowrap;font-variant-numeric:tabular-nums}
+/* 단톡방 */
+.chat{max-width:440px;background:light-dark(#b9c7d4,#1f2730);border-radius:18px;padding:14px;color:#1d1a16}
+.chat .top{font-weight:700;text-align:center;margin-bottom:10px;color:light-dark(#1d1a16,#e9e2d6)}
+.msg{display:flex;gap:8px;margin:8px 0;align-items:flex-start}
+.av{width:32px;height:32px;border-radius:10px;flex:none;display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700}
+.nm{font-size:12px;color:light-dark(#3a3631,#c9c0b2)}
+.bub{background:#fff;padding:7px 11px;border-radius:4px 14px 14px 14px;display:inline-block;max-width:290px;font-size:15px;line-height:1.5}
+.me{justify-content:flex-end}.me .bub{background:#f7e36b;border-radius:14px 4px 14px 14px}
+.day{text-align:center;font-size:12px;margin:12px 0;color:light-dark(#3a3631,#c9c0b2)}
+/* 견주기 */
+.cmp{background:var(--sand2)}
+.qs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.qs div{background:var(--bg);border-radius:10px;padding:16px;font-family:"Gowun Batang",serif;font-size:17px}
+.dub{background:var(--sand2);border-radius:12px;padding:14px 16px;margin:0 0 18px;font-size:15px}
+.dub h3{font-size:17px;margin-bottom:6px}.dub table{font-size:14px;margin-top:6px}
+.ln.on{background:light-dark(#f3ecd9,#2a241a)}
+.ln .pl{border:0;background:none;min-height:32px;padding:0 6px;color:var(--olive);font-size:14px}
+.dubmsg{font-size:13px;color:var(--soft);margin-left:6px}
+/* 웹툰 */
+.toon{max-width:520px;display:grid;gap:10px}
+.panel{position:relative;border:2px solid var(--ink);border-radius:4px;overflow:hidden;background:#efe6d6}
+.panel svg{display:block;width:100%;aspect-ratio:400/260}
+.bub2{position:absolute;background:#fff;color:#1d1a16;border:2px solid #1d1a16;border-radius:16px;padding:6px 10px;font-size:14px;line-height:1.4;max-width:62%;font-family:"Gowun Batang",serif;font-weight:700}
+.capbox{position:absolute;left:8px;top:8px;background:#2a241d;color:#f4eee3;font-size:12px;padding:3px 8px}
+.fxw{position:absolute;font-weight:900;color:#a07c2e;font-size:18px;transform:rotate(-8deg)}
+/* 카드뉴스 */
+.cards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.card{flex:0 0 min(78vw,300px);aspect-ratio:4/5;scroll-snap-align:start;border-radius:12px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;color:#f4eee3}
+.card .k{font-size:12px;opacity:.8}.card .h{font-family:"Gowun Batang",serif;font-size:26px;line-height:1.3;font-weight:700}
+.card .b{font-size:14px;line-height:1.6}.card .pg{font-size:12px;opacity:.7;text-align:right}
+/* ===== 매체별 화면 ===== */
+.mock{--ink:#2a241d;--soft:#6b6157;--line:#d8ccb7;--sand2:#f1eadc;color:var(--ink)}
+.ico svg,.ic{width:22px;height:22px;display:block}
+/* 글 — 책 한 쪽 */
+.bookpg{max-width:700px;background:#fbf7ee;border-radius:4px 10px 10px 4px;padding:clamp(28px,5vw,56px) clamp(22px,6vw,64px) 28px;box-shadow:inset 14px 0 18px -14px rgba(60,40,20,.35),0 1px 0 #e7dcc6,0 3px 0 #f3ecdc,0 4px 0 #e2d6bd,0 10px 26px rgba(40,30,20,.14)}
+.bookpg .chap{font-family:"Gowun Batang",serif;font-size:13px;letter-spacing:.2em;color:#8a7a63;text-align:center}
+.bookpg .ctitle{font-family:"Gowun Batang",serif;font-size:26px;text-align:center;margin:6px 0 28px}
+.bookpg .story{max-width:none}
+.bookpg .story p:first-child::first-letter{float:left;font-size:3.3em;line-height:.85;margin:.08em .12em 0 0;color:#5f7a3a;font-weight:700}
+.bookpg .story p{text-indent:1em}.bookpg .story p:first-child{text-indent:0}
+.bookpg .story .say{color:#4e6630}
+.bookpg .folio{text-align:center;font-family:"Gowun Batang",serif;color:#8a7a63;font-size:14px;margin-top:18px}
+/* 그림동화 — 펼친 책 */
+.book{padding:10px 4px 16px}
+.page{background:#fffaf0;color:#2a241d;border-radius:6px;padding:0;gap:0;box-shadow:0 0 0 7px #6b4e6e,0 0 0 9px #4a3450,0 12px 26px rgba(40,30,20,.25);align-items:stretch;margin:9px}
+.page img{border-radius:4px 0 0 4px;height:100%;aspect-ratio:auto;min-height:100%}
+.page>div{position:relative;padding:26px 26px 40px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(90deg,rgba(80,50,20,.16),rgba(80,50,20,0) 14%)}
+.page .pt{font-size:21px;line-height:1.85}
+.page .pn{position:absolute;bottom:12px;left:0;right:0;text-align:center;margin:0;color:#9a8a72}
+/* 신문 */
+.paper{--ink:#1d1a16;--soft:#5a5248;--line:#cfc4ad;--sand2:#e9e0cc;color:#1d1a16;background:#f5efe1;box-shadow:0 2px 0 #e4dac4,0 12px 28px rgba(40,30,20,.16);border:0;background-image:radial-gradient(rgba(120,100,60,.05) 1px,transparent 1px);background-size:3px 3px}
+.mast .issue{font-family:"Noto Sans KR";font-size:11px;letter-spacing:.15em;color:#5a5248;margin-bottom:4px}
+/* 사진 — 사진전 */
+.gallery{background:#24201c;border-radius:12px;padding:clamp(22px,4vw,40px);color:#efe7da;background-image:radial-gradient(ellipse at 50% 0,rgba(255,240,210,.12),transparent 60%)}
+.gallery .gtitle{font-family:"Gowun Batang",serif;font-size:22px;margin:0 0 2px}.gallery .gsub{font-size:13px;color:#b9ad9b;margin-bottom:24px}
+.gallery .ph{transform:none!important;background:#fff;padding:14px;border-radius:0;box-shadow:0 18px 30px rgba(0,0,0,.45);position:relative}
+.gallery .ph::before{content:"";position:absolute;left:10%;right:10%;top:-26px;height:30px;background:radial-gradient(ellipse at 50% 100%,rgba(255,236,200,.22),transparent 70%)}
+.gallery figcaption{background:#f6f2ea;margin:14px -14px -14px;padding:10px 14px 12px;border-top:1px solid #e5ddcf}
+.gallery .cap{margin-top:0}
+/* 라디오 */
+.radio{max-width:620px;background:linear-gradient(#3a332b,#2a241d);border-radius:22px;padding:18px 20px 16px;color:#efe7da;box-shadow:0 14px 30px rgba(20,15,10,.3),inset 0 1px 0 rgba(255,255,255,.08);margin-bottom:18px}
+.rtop{display:flex;justify-content:space-between;align-items:center;font-size:13px;letter-spacing:.08em}
+.onair{border:1.5px solid #6b5f52;color:#8a7d6e;border-radius:4px;padding:2px 8px;font-weight:700}
+.radio.playing .onair{border-color:#e2483a;color:#fff;background:#e2483a;box-shadow:0 0 12px rgba(226,72,58,.7);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.6}}
+.freq{color:#d9c58f;font-variant-numeric:tabular-nums}
+.rlcd{margin:12px 0;background:#1b2a22;border-radius:10px;padding:14px 16px;color:#a9e0b8;font-family:"Noto Sans KR";box-shadow:inset 0 2px 8px rgba(0,0,0,.5);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:end}
+.rlcd .prog{font-size:12px;opacity:.7;grid-column:1/-1}
+.rlcd .now{font-size:24px;font-weight:700;line-height:1.2}
+.rlcd .line{grid-column:1/-1;font-size:13px;opacity:.85;min-height:2.6em;font-family:"Gowun Batang",serif}
+.eq{display:flex;gap:3px;align-items:flex-end;height:26px}.eq i{width:4px;background:#a9e0b8;border-radius:2px;height:4px;opacity:.6}
+.radio.playing .eq i{animation:eqb .5s ease-in-out infinite alternate}
+@keyframes eqb{from{height:4px}to{height:26px}}
+.rprog{height:6px;background:#4a4036;border-radius:3px;overflow:hidden}.rprog i{display:block;height:100%;width:0;background:#d9c58f}
+.rtime{display:flex;justify-content:space-between;font-size:12px;color:#b9ad9b;margin-top:4px;font-variant-numeric:tabular-nums}
+.radio .bnav button{background:#4a4036;color:#efe7da;border-color:#5a4e42}.radio .bnav button.pri{background:#d9c58f;color:#2a241d;border-color:#d9c58f}
+.radio .dubmsg{color:#b9ad9b}
+.cue{max-width:760px;background:#fbfaf6;color:#2a241d;border:1px solid #d8ccb7;border-radius:6px;padding:14px 18px;font-family:"Noto Sans KR";--line:#e2d8c6;--olive:#5f7a3a;--soft:#6b6157}
+.cue .ctop{display:flex;justify-content:space-between;font-size:12px;color:#6b6157;border-bottom:2px solid #2a241d;padding-bottom:6px;margin-bottom:6px}
+.cue .ln.on{background:#f3ecd9}
+details.castbox{margin:0 0 14px;max-width:760px}details.castbox summary{cursor:pointer;font-weight:700;padding:6px 0}
+/* 숏츠 — 화면 위 UI */
+.phone .bar{top:auto;bottom:0;left:0;right:0;height:3px;border-radius:0;z-index:9;background:rgba(255,255,255,.3)}
+.phone .bar i{border-radius:0;background:#ff3b30}
+.phone .time{display:none}
+.sui{position:absolute;right:6px;bottom:78px;z-index:8;display:grid;gap:14px;justify-items:center;color:#fff}
+.sui div{display:grid;justify-items:center;font-size:10px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.sui svg{width:26px;height:26px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.sch{position:absolute;left:10px;right:56px;bottom:14px;z-index:8;color:#fff;font-size:12px;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.sch .row{display:flex;align-items:center;gap:6px;font-weight:700}
+.sch .sav{width:24px;height:24px;border-radius:50%;background:#d9c58f url(ch_tirzah.webp) 50% 6%/180% auto no-repeat;border:1.5px solid #fff;flex:none}
+.sch .sub{background:#fff;color:#111;border-radius:99px;padding:1px 8px;font-size:10px;text-shadow:none}
+.sch .desc{margin-top:4px;font-size:11px;opacity:.95}
+.stag{position:absolute;left:10px;top:10px;z-index:8;font-weight:900;font-size:13px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);display:flex;gap:4px;align-items:center}
+.stag i{display:inline-block;width:14px;height:16px;background:#ff3b30;border-radius:4px;position:relative}.stag i::after{content:"";position:absolute;left:5px;top:4px;border-left:6px solid #fff;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.scene.v2 .tx{top:9%;right:16%}
+.scene.v2 .tx.low{bottom:24%}
+/* 단톡방 — 메신저 화면 */
+.mphone{max-width:400px;border-radius:30px;border:9px solid #2a241d;overflow:hidden;background:#b2c7d9;box-shadow:0 12px 28px rgba(20,15,10,.22)}
+.mhead{display:flex;align-items:center;gap:8px;padding:12px 12px 10px;background:#a9bed1;color:#1d1a16}
+.mhead b{flex:1;font-size:16px}.mhead b span{font-weight:400;color:#56616b;margin-left:4px}
+.mhead svg{width:20px;height:20px}
+.chat{max-width:none;border-radius:0;background:#b2c7d9;padding:8px 12px 12px;height:520px;overflow-y:auto;color:#1d1a16}
+.chat .top{display:none}
+.av{width:38px;height:38px;border-radius:14px;background-size:190% auto!important;background-position:50% 5%!important;background-repeat:no-repeat!important;border:0}
+.msg .nm{font-size:12px;color:#3a434b;margin-bottom:2px}
+.chat .nm{position:static;transform:none;background:none;padding:0;font-weight:400;left:auto;top:auto;white-space:normal}
+.day{display:table;margin:12px auto;background:rgba(0,0,0,.12);color:#fff;border-radius:99px;padding:2px 12px}
+.minput{display:flex;align-items:center;gap:8px;background:#fff;padding:8px 10px;color:#9a9a9a;font-size:14px}
+.minput span{flex:1;background:#f1f1f1;border-radius:99px;padding:7px 12px}
+.minput b{background:#f7e36b;color:#1d1a16;border-radius:8px;padding:5px 10px;font-size:13px}
+.minput svg{width:20px;height:20px;color:#9a9a9a}
+.msg.hide,.day.hide,.notice.hide,.vote.hide{display:none}
+.chat>.hide{display:none!important}.chat>.pop{animation:msgIn .28s ease-out}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.typing{display:inline-flex;gap:3px;background:#fff;border-radius:4px 14px 14px 14px;padding:10px 12px}.typing i{width:6px;height:6px;border-radius:50%;background:#9aa3ab;animation:tdot 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{50%{transform:translateY(-4px);opacity:.5}}
+/* 웹툰 — 뷰어 */
+.wt{max-width:520px;background:#fff;color:#1d1a16;border-radius:14px;overflow:hidden;box-shadow:0 10px 26px rgba(20,15,10,.16);border:1px solid #e6e0d6}
+.wthead{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #eee}
+.wthead svg{width:20px;height:20px}.wthead div{flex:1;line-height:1.3}.wthead b{display:block;font-size:15px}.wthead small{color:#888;font-size:12px}
+.wt .toon{max-width:none;gap:26px;padding:22px 16px}
+.wt .panel{border:2.5px solid #1d1a16;border-radius:2px}
+.wtend{text-align:center;padding:4px 16px 18px;font-size:13px;color:#888}
+.wtact{display:flex;justify-content:space-around;border-top:1px solid #eee;padding:12px 8px;font-size:13px;font-weight:700}
+.wtact span{display:flex;align-items:center;gap:6px}.wtact svg{width:20px;height:20px}.wtact .lk{color:#e2483a}
+.wtbest{margin:0 14px 16px;background:#f6f4f0;border-radius:10px;padding:10px 12px;font-size:13px}
+.wtbest .bt{display:inline-block;background:#e2483a;color:#fff;border-radius:4px;font-size:10px;padding:0 5px;margin-right:6px;font-weight:700}
+.wtbest .u{color:#888;font-size:12px}
+.wtnext{display:block;text-align:center;margin:0 14px 16px;padding:11px;border-radius:8px;background:#1d1a16;color:#fff;font-weight:700;font-size:14px}
+/* 카드뉴스 — SNS 게시물 */
+.post{max-width:420px;background:#fff;color:#1d1a16;border-radius:14px;overflow:hidden;border:1px solid #e6e0d6;box-shadow:0 10px 26px rgba(20,15,10,.14)}
+.phead{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.pav{width:34px;height:34px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#f2b84b,#e2483a,#6b4e6e)}
+.pav span{display:block;width:100%;height:100%;border-radius:50%;border:2px solid #fff;background:#2a241d url(ch_noah.webp) 50% 5%/190% auto no-repeat}
+.phead b{flex:1;font-size:14px}.phead small{display:block;font-weight:400;color:#888;font-size:11px}.phead svg{width:20px}
+.post .cards{gap:0;padding:0;scrollbar-width:none}.post .cards::-webkit-scrollbar{display:none}
+.post .card{flex:0 0 100%;border-radius:0;position:relative;overflow:hidden}
+.card .cimg{position:absolute;right:-4%;bottom:6%;width:46%;pointer-events:none}
+.card .cimg.row{left:4%;right:4%;width:auto;display:flex;bottom:16%}.card .cimg.row img{width:20%}
+.card>*{position:relative;z-index:1}.card.hi .h,.card.hi .b{max-width:62%}.card .cimg{z-index:0}
+.pdots{display:flex;justify-content:center;gap:4px;padding:8px 0 0}.pdots i{width:6px;height:6px;border-radius:50%;background:#d0d0d0}.pdots i.on{background:#3b82f6}
+.pact{display:flex;gap:14px;padding:6px 12px 4px;align-items:center}.pact svg{width:24px;height:24px}.pact .sv{margin-left:auto}
+.plike{padding:0 12px;font-size:14px;font-weight:700}
+.pcap{padding:4px 12px 14px;font-size:14px;line-height:1.5}.pcap .tg{color:#2f5aa8}.pcap .tm{display:block;color:#999;font-size:11px;margin-top:4px}
+.pnav{display:flex;gap:8px;margin-top:10px}
+.ctime{white-space:nowrap}.chat .bub{max-width:min(250px,68vw)}
+.phone::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(transparent,rgba(0,0,0,.62));z-index:7;pointer-events:none}
+.photos{grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}
+.gram{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-8px 0 20px;font-size:14px}
+.gram b{font-family:"Gowun Batang",serif;margin-right:4px}.gram span{border:1px solid var(--olive);color:var(--olive);border-radius:999px;padding:3px 10px}
+.nph{margin:0 0 12px;break-inside:avoid}.nph svg{width:100%;display:block;aspect-ratio:400/260}.nph figcaption{font-size:12px;color:var(--soft);margin-top:4px}
+.ctime{font-size:11px;color:light-dark(#3a3631,#c9c0b2);align-self:flex-end;margin:0 4px}
+.vote{background:#fff;border-radius:12px;padding:10px 12px;margin:10px 0;font-size:14px}.vote .vb{height:8px;border-radius:4px;background:#f7e36b;margin:4px 0}
+.notice{background:rgba(255,255,255,.7);border-radius:8px;padding:6px 10px;font-size:13px;margin-bottom:8px}
+.capgrid{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:18px;align-items:center}
+@media(max-width:860px){.hero .wrap,.page,.pgrid,.sgrid,.mapgrid,.gwrap{grid-template-columns:minmax(0,1fr)}.qs{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.memo{grid-template-columns:minmax(0,1fr)}.ln{grid-template-columns:minmax(0,1fr);gap:0}
+table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;font-weight:700}.stack td:empty{display:none}}
+@media(prefers-reduced-motion:reduce){.scene{transition:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+
+<header class="band hero">
+  <div class="wrap">
+    <div>
+      <h1>슬로브핫의 딸들<br>한 이야기, 아홉 그릇</h1>
+      <p class="ref">민수기 27:1–11 · 여호수아 17:3–6 · 13주차 미디어 워크숍 시연 자료</p>
+      <div class="sum">
+        <p>광야 40년이 끝나 갈 무렵, 이스라엘은 약속의 땅에 들어가기 전 땅을 나눌 준비를 합니다. 땅은 아들을 통해 이어졌습니다.</p>
+        <p>므낫세 지파의 슬로브핫은 광야에서 죽었고, 아들 없이 딸 다섯만 남겼습니다 — <em>말라, 노아, 호글라, 밀가, 디르사.</em></p>
+        <p>다섯 딸은 회막 문 앞, 모세와 제사장 엘르아살과 지휘관들과 온 회중 앞에 서서 아버지의 형제들 가운데서 기업을 달라고 청합니다. 모세가 이 일을 여호와 앞에 아뢰자 대답이 옵니다. <em>"슬로브핫 딸들의 말이 옳으니"</em>(민 27:7). 그날 상속의 새 규례가 생기고, 여러 해 뒤 여호수아 때 딸들은 실제로 땅을 받습니다.</p>
+      </div>
+    </div>
+    <img class="heroart" id="heroArt" src="img_hero.jpg" alt="장막 앞에서 손을 맞잡은 다섯 자매">
+  </div>
+</header>
+
+<nav class="tabs" aria-label="매체">
+  <div class="tabrow scroll" id="tabs">
+    <a href="#geul">글</a><a href="#donghwa">그림동화</a><a href="#sinmun">신문</a><a href="#sajin">사진</a><a href="#radio">라디오</a><a href="#shorts">숏츠</a><a href="#dantok">단톡방</a><a href="#webtoon">4컷 웹툰</a><a href="#card">카드뉴스</a><a href="#gyeonju">견주어 보기</a>
+  </div>
+</nav>
+
+<main>
+<!-- 글 -->
+<section class="view band" id="v-geul"><div class="wrap">
+  <div class="vhead"><h2>글 — 디르사의 이야기</h2><p>한 사람의 목소리로 다시 쓴 이야기글</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>한 사람의 목소리</span><span>속마음</span><span>읽는 속도는 독자가 정한다</span></div>
+  <article class="bookpg mock"><div class="chap">민수기 27장에서</div><div class="ctitle">디르사의 이야기</div><div class="story">
+    <p>우리 아버지 이름은 슬로브핫입니다. 아버지는 광야에서 돌아가셨어요. 남은 건 우리 다섯 자매 — 말라, 노아, 호글라, 밀가, 그리고 저 디르사.</p>
+    <p>곧 약속의 땅에 들어간대요. 지파마다, 집안마다 땅을 나눈대요. 그런데 땅은 아들에게 간대요. 우리 집엔 아들이 없어요. 그러면 우리 집 몫은 어디로 가나요? 아버지의 이름은요?</p>
+    <p>그 소식을 들은 밤, 우리는 장막 안에서 오래 이야기했어요. "말해 보자." "누구 앞에서?" "모세 앞에서. 모두가 보는 앞에서."</p>
+    <p>회막 문 앞. 모세와 제사장 엘르아살, 지도자들, 그리고 온 회중이 우리를 보고 있었어요. 다리가 떨렸지만 우리는 손을 잡고 함께 섰어요. 그리고 말했어요. <span class="say">아들이 없다고 아버지의 이름이 집안에서 지워져야 합니까? 아버지의 형제들 가운데서 우리에게도 기업을 주십시오.</span></p>
+    <p>모세는 바로 대답하지 않았어요. 그 일을 여호와 앞에 가지고 갔어요.</p>
+    <p>그리고 대답이 왔어요. <span class="say">"슬로브핫 딸들의 말이 옳으니."</span> 그날 이스라엘에 새 규례가 생겼어요. 아들이 없으면, 딸에게. 우리 다섯의 목소리가 우리 뒤에 올 딸들의 길이 되었어요.</p>
+  </div><div class="folio">— 27 —</div></article>
+  <p class="note">성경 본문을 바탕으로 장면과 말을 꾸민 다시 쓰기입니다. 직접 인용은 민 27:7 한 구절입니다.</p>
+  <div class="memo"><div><b>잘 전하는 것</b>마음속 목소리, 떨림, 자매들의 밤 — 읽는 사람이 속도를 정하고 멈춰 생각할 수 있다</div><div class="miss"><b>놓치는 것</b>장면을 눈으로 보지 못한다. 글을 읽을 수 있는 사람에게만 열린다. '디르사의 눈'이 이야기를 하나로 정한다</div></div>
+</div></section>
+
+<!-- 그림동화 -->
+<section class="view band" id="v-donghwa"><div class="wrap">
+  <div class="vhead"><h2>그림동화 — 손을 꼭 잡았어요</h2><p>여섯 쪽, 유아 · 유치부 눈높이 · 소리 내어 읽기용</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>한 쪽에 한 장면</span><span>되풀이되는 말</span><span>넘기는 순간의 "다음엔?"</span></div>
+  <div class="book" id="book" tabindex="0" aria-label="그림동화 쪽 넘기기"></div>
+  <div class="bnav"><button id="bPrev" type="button">이전 쪽</button><button id="bNext" class="pri" type="button">다음 쪽</button><span class="note" id="bNum">1 / 6</span><button id="bRead" type="button">이 쪽 읽어 주기</button><span class="dubmsg" id="bMsg">일레븐랩스 낭독</span></div>
+  <div class="memo"><div><b>잘 전하는 것</b>아이 눈높이의 장면과 감정. 한 쪽에 한 장면 — 넘길 때마다 '다음엔?'이 생긴다</div><div class="miss"><b>놓치는 것</b>계보와 상속 규례의 세부. 그림이 인물의 얼굴과 분위기를 정해 버려 상상의 폭이 좁아진다</div></div>
+</div></section>
+
+<!-- 신문 -->
+<section class="view band" id="v-sinmun"><div class="wrap">
+  <div class="vhead"><h2>신문 — 광야신문 1면</h2><p>사실 · 배경 · 규례를 한 면에</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>제목과 부제</span><span>육하원칙 첫 문단</span><span>사진과 캡션</span><span>기자 수첩</span></div>
+  <article class="paper">
+    <div class="mast"><div class="issue">제40권 · 특별판</div><div class="name">광야신문</div>
+      <div class="meta"><span>모압 평지에서</span><span>출애굽 40년</span><span>회막 문 앞 특별판</span></div></div>
+    <div class="hl">딸도 아버지의 기업을 잇는다</div>
+    <div class="sub">슬로브핫의 다섯 딸, 회막 앞에서 청원 … 하나님 "슬로브핫 딸들의 말이 옳으니"</div>
+    <div class="pgrid">
+      <div class="cols">
+        <figure class="nph" id="nph"></figure>
+        <p>약속의 땅을 앞두고 지파별 땅 나누기를 준비하던 이스라엘 진영에서, 아들 없이 세상을 떠난 므낫세 지파 슬로브핫의 다섯 딸이 회막 문 앞에 나아가 아버지 몫의 기업을 달라고 청했다.</p>
+        <p>말라, 노아, 호글라, 밀가, 디르사 다섯 자매는 모세와 제사장 엘르아살, 지휘관들과 온 회중 앞에서 아버지가 광야에서 죽었으나 고라의 무리에 들지 않았고 자기 죄로 죽었다고 밝혔다. 이어 아들이 없다는 이유로 아버지의 이름이 집안에서 지워지는 것이 옳으냐고 물으며, 아버지의 형제들 가운데서 자신들에게 기업을 달라고 요청했다.</p>
+        <p>모세는 즉답하지 않고 이 사안을 여호와 앞에 아뢰었다. 돌아온 대답은 분명했다. 하나님은 슬로브핫 딸들의 말이 옳다고 하시며, 아버지의 형제들 가운데서 그들에게 기업을 주어 아버지의 몫이 딸들에게 돌아가게 하라고 명하셨다.</p>
+        <p>이번 결정은 한 집안의 일에 그치지 않는다. 이스라엘 자손 전체에 적용되는 상속 규례가 새로 정해졌기 때문이다(옆 상자). 진영 안에서는 "아들이 없는 집도 이제 이름이 끊어지지 않게 되었다"는 반응이 나온다.</p>
+        <p><b>기자 수첩</b> — 다섯 자매가 바꾼 것은 법 조항 하나가 아니다. 모두가 당연하게 여기던 일에 "왜요?"라고 물은 목소리, 그리고 그 물음을 하나님 앞에 가지고 간 지도자가 함께 길을 냈다.</p>
+      </div>
+      <aside class="side">
+        <div><h4>새 상속 규례 (민 27:8–11)</h4>
+          <div class="flow"><span>예전: 아들에게만</span><span>① 아들</span><span>② 아들이 없으면 → 딸</span><span>③ 딸도 없으면 → 형제</span><span>④ 형제도 없으면 → 아버지의 형제</span><span>⑤ 그도 없으면 → 가장 가까운 친족</span></div></div>
+        <div><h4>다섯 자매는 누구?</h4>므낫세 지파. 아버지 슬로브핫은 헤벨의 아들, 헤벨은 길르앗의 아들, 길르앗은 마길의 아들, 마길은 요셉의 아들 므낫세의 아들이다(민 27:1).</div>
+        <div><h4>오늘의 만나</h4>내일 아침에도 내립니다. 여섯째 날에는 갑절로 거두십시오(출 16:22). — 생활 정보</div>
+        <div><h4>그 뒤의 이야기</h4>여호수아 때 다섯 자매는 엘르아살과 여호수아 앞에 다시 나아가 약속대로 땅을 받는다(수 17:3–6). 다만 기업이 다른 지파로 넘어가지 않도록, 조상 지파 안에서 혼인하라는 조건이 뒤에 붙는다(민 36장).</div>
+      </aside>
+    </div>
+  </article>
+  <p class="note">수업용으로 꾸민 가상의 신문 지면입니다. 기사 속 진영의 반응은 꾸민 말입니다.</p>
+  <div class="memo"><div><b>잘 전하는 것</b>누가 · 언제 · 어디서 · 무엇을 — 사실관계, 계보, 규례, 뒷이야기까지 한눈에. 중고등부 · 청년부의 '정리하기'에 좋다</div><div class="miss"><b>놓치는 것</b>떨림과 용기 같은 마음. '객관적'인 문체가 해석을 숨긴다 — 제목과 기자 수첩은 누가, 어떤 관점으로 썼나? (리터러시 질문 1 · 4)</div></div>
+</div></section>
+
+<!-- 사진 -->
+<section class="view band" id="v-sajin"><div class="wrap">
+  <div class="vhead"><h2>사진 — 다섯 켤레의 신발</h2><p>포토 스토리 5컷 · 사진 아래는 찍는 방법</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>한 순간</span><span>구도와 빛</span><span>캡션이 뜻을 정한다</span></div>
+  <div class="gallery"><div class="gtitle">사진전 「다섯 켤레의 신발」</div><div class="gsub">포토 스토리 5점 · 각 사진 아래 카드: 제목과 찍는 방법</div><div class="photos" id="photos"></div></div>
+  <div class="dub" style="margin-top:22px"><h3>같은 사진, 다른 캡션</h3><div class="capgrid"><figure class="ph" id="capPh" style="margin:0"></figure><div><div class="bnav" id="capBtns"><button type="button" class="pri" data-c="0">캡션 ①</button><button type="button" data-c="1">캡션 ②</button><button type="button" data-c="2">캡션 ③</button></div><p id="capTxt" style="font-family:'Gowun Batang',serif;font-size:21px;margin:12px 0 6px"></p><p class="note">사진은 그대로인데 한 줄이 뜻을 바꾼다 — 리터러시 질문 1 · 4. 학생들에게 네 번째 캡션을 써 보게 한다.</p></div></div></div>
+  <p class="note" style="margin-top:16px">수업에서 바로 해 보기: 학생 다섯 명이 손 · 발 · 뒷모습으로 연출하고 휴대폰으로 찍는다. 얼굴은 찍지 않아도 이야기가 된다.</p>
+  <div class="memo"><div><b>잘 전하는 것</b>한 순간의 감정과 상징. 말없이 오래 보게 한다 — 사진 한 장 묵상(도입 · 표현 자리)에 좋다</div><div class="miss"><b>놓치는 것</b>대화와 법의 내용. 설명이 없으면 사람마다 전혀 다르게 읽힌다 — 캡션이 의미를 정한다</div></div>
+</div></section>
+
+<!-- 라디오 -->
+<section class="view band" id="v-radio"><div class="wrap">
+  <div class="vhead"><h2>라디오 — 광야 라디오 「오늘의 사람들」</h2><p>2분 5초 낭독극 · 배역 8명</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>소리만</span><span>말로 보여 주기(묘사)</span><span>효과음과 침묵</span></div>
+  <div class="roles"><span>진행자</span><span>현장 리포터</span><span>말라</span><span>노아</span><span>호글라</span><span>밀가</span><span>디르사</span><span>모세</span><span>효과음 (나머지 모두)</span></div>
+  <div class="radio" id="radioBox"><div class="rtop"><span class="onair">ON AIR</span><span class="freq">광야 FM 40.0 MHz</span></div><div class="rlcd"><div class="prog">광야 라디오 「오늘의 사람들」 — 완성 낭독극 (일레븐랩스)</div><div class="now" id="rNow">방송 대기</div><div class="eq" aria-hidden="true"><i style="animation-delay:0.00s"></i><i style="animation-delay:0.13s"></i><i style="animation-delay:0.26s"></i><i style="animation-delay:0.39s"></i><i style="animation-delay:0.02s"></i><i style="animation-delay:0.15s"></i><i style="animation-delay:0.28s"></i><i style="animation-delay:0.41s"></i><i style="animation-delay:0.04s"></i><i style="animation-delay:0.17s"></i></div><div class="line" id="rLine">전체 듣기를 누르면 방송이 시작됩니다.</div></div><div class="rprog"><i id="rBar"></i></div><div class="rtime"><span id="rCur">0:00</span><span>2:05</span></div><div class="bnav"><button id="rPlay" class="pri" type="button">전체 듣기</button><button id="rStop" type="button">멈춤</button><span class="dubmsg" id="rMsg"></span></div></div><details class="castbox"><summary>배역과 목소리 (일레븐랩스)</summary><div class="scroll"><table><thead><tr><th>배역</th><th>일레븐랩스 목소리</th><th>성격</th></tr></thead><tbody id="castT"></tbody></table></div></details><div class="cue"><div class="ctop"><b>방송 대본 (큐시트)</b><span>줄마다 '듣기' — 그 대사만</span></div><div class="script" id="script"></div></div>
+  <p class="note" style="margin-top:12px">성경 본문을 바탕으로 꾸민 대본입니다. 모세의 첫 말 "슬로브핫 딸들의 말이 옳으니"만 본문 그대로입니다.</p>
+  <div class="memo"><div><b>잘 전하는 것</b>목소리 · 침묵 · 긴장. 보이지 않아서 오히려 상상하게 한다. 여럿이 배역을 나눠 읽으면 모두가 이야기 안에 들어온다</div><div class="miss"><b>놓치는 것</b>얼굴과 장면. 그래서 라디오는 <b style="display:inline;font-size:inherit">말로 보여 준다</b> — 리포터가 "맨 앞의 말라가…"처럼 누가 무엇을 하는지 묘사해야 이름이 헷갈리지 않는다</div></div>
+</div></section>
+
+<!-- 숏츠 -->
+<section class="view band" id="v-shorts"><div class="wrap">
+  <div class="vhead"><h2>숏츠 — 45초 세로 영상</h2><p>콘티를 휴대폰 화면처럼 재생해 보기</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>첫 3초</span><span>소리 없이도 읽히는 큰 자막</span><span>끝 질문</span><span>반복 재생</span></div>
+  <div class="sgrid">
+    <div>
+      <div class="phone" id="phone" aria-live="polite"><div class="bar"><i id="pbar"></i></div><div class="time" id="ptime">0:00</div><div class="stag"><i></i>Shorts</div><div class="sui"><div><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 3 5 6.4 5c2.1 0 3.6 1.2 4.6 2.7C12 6.2 13.5 5 15.6 5 19 5 21.1 8.6 19.6 11.9 17.5 16.4 12 21 12 21z" fill="currentColor"/></svg>1.2만</div><div><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="currentColor"/></svg>342</div><div><svg viewBox="0 0 24 24"><path d="M14 4l7 7-7 7v-4c-6 0-9 2-11 6 1-7 4-11 11-12z" fill="currentColor"/></svg>공유</div><div><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg></div></div><div class="sch"><div class="row"><span class="sav"></span>@광야라디오<span class="sub">구독</span></div><div class="desc">아들이 없으면 이름도 사라진다? #민수기27장 #슬로브핫의딸들</div></div></div>
+      <div class="bnav"><button id="play" class="pri" type="button">재생</button><button id="stop" type="button">처음으로</button></div><p class="dubmsg" id="sMsg">재생하면 내레이션(일레븐랩스)이 함께 나옵니다</p>
+    </div>
+    <div class="scroll"><table class="stack"><thead><tr><th>시간</th><th>화면</th><th>자막</th></tr></thead><tbody id="ctable"></tbody></table><p class="note" style="margin-top:10px">숏츠는 대부분 소리를 끄고 본다 — 자막만으로 이야기가 이해되는지 꼭 확인한다.</p></div>
+  </div>
+  <div class="memo"><div><b>잘 전하는 것</b>첫 3초의 훅, 짧고 강렬한 한 문장, 끝 질문으로 댓글 참여를 부른다. 청소년의 언어</div><div class="miss"><b>놓치는 것</b>맥락 · 계보 · 규례가 모두 빠진다. 멈출 틈이 없다 — 수업에서 쓴다면 강의 ③처럼 멈추고 묻는 시간이 꼭 필요하다</div></div>
+</div></section>
+
+<!-- 단톡방 -->
+<section class="view band" id="v-dantok"><div class="wrap">
+  <div class="vhead"><h2>단톡방 — 슬로브핫 자매들 (5)</h2><p>청소년 말투로 다시 쓴 대화</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>실시간</span><span>짧은 말</span><span>공지와 투표</span><span>각자의 목소리</span></div>
+  <div class="mphone mock"><div class="mhead"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><b>슬로브핫 자매들<span>5</span></b><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div><div class="chat" id="chat"></div><div class="minput"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>메시지 입력</span><b>전송</b></div></div><div class="bnav"><button id="cPlay" class="pri" type="button">대화 처음부터 보기</button><button id="cAll" type="button">전체 보기</button></div>
+  <p class="note" style="margin-top:12px">성경 본문을 바탕으로 꾸민 대화입니다.</p>
+  <div class="memo"><div><b>잘 전하는 것</b>고민하는 과정과 다섯 자매 각자의 목소리. 결정 전날 밤이 보인다. 청소년이 바로 따라 써 볼 수 있다</div><div class="miss"><b>놓치는 것</b>무게감. 성경 이야기를 가볍게 만들 위험이 있다 — 이 위험 자체가 좋은 토론거리다</div></div>
+</div></section>
+
+<!-- 웹툰 -->
+<section class="view band" id="v-webtoon"><div class="wrap">
+  <div class="vhead"><h2>4컷 웹툰 — 그날, 회막 문 앞</h2><p>칸과 말풍선으로</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>기</span><span>승</span><span>전</span><span>결</span><span>칸 사이의 빈칸</span><span>말풍선과 효과음</span></div>
+  <div class="wt mock"><div class="wthead"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>그날, 회막 문 앞</b><small>1화 · 다섯 자매, 일어서다</small></div><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div><div class="toon" id="toon"></div><div class="wtend">— 1화 끝 —</div><div class="wtact"><span class="lk"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 3 5 6.4 5c2.1 0 3.6 1.2 4.6 2.7C12 6.2 13.5 5 15.6 5 19 5 21.1 8.6 19.6 11.9 17.5 16.4 12 21 12 21z" fill="currentColor"/></svg>2,431</span><span><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>댓글 128</span><span><svg viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>공유</span></div><div class="wtbest"><span class="bt">BEST</span>마지막 칸 디르사 표정 나만 웃김?ㅋㅋㅋ 너무 놀라서 굳음 <div class="u">광야중등부 · ♥ 412</div></div><span class="wtnext">다음 화: 여러 해 뒤, 약속의 땅에서 ▶</span></div>
+  <p class="note" style="margin-top:12px">성경 본문을 바탕으로 꾸민 만화입니다. 4컷의 모세 대사만 본문(민 27:7) 그대로입니다. 좋아요 · 댓글 숫자와 베스트 댓글은 꾸민 것입니다.</p>
+  <div class="memo"><div><b>잘 전하는 것</b>칸과 칸 사이의 '빈칸'을 읽는 사람이 채운다. 표정과 말풍선으로 감정이 빠르게 전해진다. 청소년이 직접 그려 보기 쉽다</div><div class="miss"><b>놓치는 것</b>네 칸에 다 담을 수 없어 장면을 고르고 버려야 한다. 무엇을 버렸나? — 그림동화 6쪽과 견주어 보기</div></div>
+</div></section>
+
+<!-- 카드뉴스 -->
+<section class="view band" id="v-card"><div class="wrap">
+  <div class="vhead"><h2>카드뉴스 — 6장</h2><p>SNS 게시물처럼 옆으로 넘겨 보기 · 좋아요 숫자는 꾸민 것</p></div>
+  <div class="gram"><b>이 매체의 문법</b><span>표지 한 줄</span><span>한 장에 한 메시지</span><span>같은 틀</span><span>마지막 장의 행동 유도</span></div>
+  <div class="post mock"><div class="phead"><span class="pav"><span></span></span><b>gwangya.news<small>광야 · 회막 문 앞</small></b><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg></div><div class="cards" id="cards" tabindex="0" aria-label="카드뉴스 넘기기"></div><div class="pdots" id="pdots"></div><div class="pact"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.3-9-8.5C1.6 8.4 3.6 5 6.8 5c2 0 3.4 1.1 4.3 2.5h1.8C13.8 6.1 15.2 5 17.2 5c3.2 0 5.2 3.4 3.8 6.5C19 15.7 12 20 12 20z" fill="none" stroke="currentColor" stroke-width="2"/></svg><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="sv"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-5-6 5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span></div><div class="plike">좋아요 1,284개</div><div class="pcap"><b>gwangya.news</b> 아들이 없으면 이름도 사라진다? 다섯 자매가 모두 앞에서 물었습니다. 👉 넘겨 보세요 <span class="tg">#민수기27장 #슬로브핫의딸들 #교회학교</span><span class="tm">2시간 전</span></div></div><div class="pnav"><button id="cPrev" type="button">이전 장</button><button id="cNext" class="pri" type="button">다음 장</button></div>
+  <div class="memo"><div><b>잘 전하는 것</b>한 장에 한 문장. 넘기는 손맛과 마지막 장의 질문이 공유와 댓글을 부른다</div><div class="miss"><b>놓치는 것</b>신문 1면과 같은 사실을 담았지만 계보 · 뒷이야기 · 기자 수첩이 빠졌다. 누가, 무엇을 남기고 잘랐나? (리터러시 질문 4)</div></div>
+</div></section>
+
+<!-- 견주어 보기 -->
+<section class="view band cmp" id="v-gyeonju"><div class="wrap">
+  <div class="vhead"><h2>견주어 보기 — 같은 이야기, 다른 그릇</h2><p>"미디어가 메시지다" — 무엇에 담느냐에 따라 남는 것이 달라진다</p></div>
+  <div class="scroll"><table class="stack"><thead><tr><th>그릇</th><th>잘 전하는 것</th><th>놓치는 것</th><th>잘 어울리는 자리</th></tr></thead><tbody id="cmpT"></tbody></table></div>
+  <h3 style="margin:26px 0 10px">같은 순간, 아홉 가지 표현 — "회막 문 앞에 선 그때"</h3>
+  <div class="scroll"><table class="stack"><thead><tr><th>그릇</th><th>그 순간을 이렇게 담았다</th><th>쓴 도구</th></tr></thead><tbody id="momT"></tbody></table></div>
+  <div class="qs"><div>1. 어느 그릇에서 이야기가 가장 크게 들렸나?</div><div>2. 그 그릇에서 무엇이 빠졌나? 누가 그 그릇을 골랐나?</div><div>3. 우리 부서 아이들에게는 어떤 그릇이 맞을까? 왜?</div></div>
+</div></section>
+</main>
+
+<script>
+{
+const C=['#8a5a44','#5f7a3a','#3f5a78','#a07c2e','#6b4e6e'];
+const N=['말라','노아','호글라','밀가','디르사'];
+const sis=(x,b,h,c)=>`<g transform="translate(${x},${b})"><path d="M${-h*.24},0 L${-h*.13},${-h*.66} Q0,${-h*.72} ${h*.13},${-h*.66} L${h*.24},0Z" fill="${c}"/><path d="M${-h*.17},${-h*.62} Q${-h*.19},${-h*1.02} 0,${-h*1.02} Q${h*.19},${-h*1.02} ${h*.17},${-h*.62}Z" fill="${c}" opacity=".78"/><circle cx="0" cy="${-h*.8}" r="${h*.095}" fill="var(--skin)"/></g>`;
+const five=(x0,b,gap,h,hand)=>{let s='';const hs=[1,.94,.9,.86,.8];for(let i=0;i<5;i++)s+=sis(x0+i*gap,b,h*hs[i],C[i]);if(hand)s+=`<path d="M${x0} ${b-h*.38} L${x0+4*gap} ${b-h*.36}" stroke="var(--skin)" stroke-width="3" stroke-linecap="round" opacity=".9"/>`;return s};
+const man=(x,b,h,c,staff)=>`<g transform="translate(${x},${b})"><path d="M${-h*.25},0 L${-h*.14},${-h*.68} L${h*.14},${-h*.68} L${h*.25},0Z" fill="${c}"/><circle cx="0" cy="${-h*.8}" r="${h*.11}" fill="var(--skin)"/><path d="M${-h*.09},${-h*.76} Q0,${-h*.6} ${h*.09},${-h*.76}Z" fill="#e9e2d6"/>${staff?`<path d="M${h*.3},0 L${h*.3},${-h*1.05} q0 -10 -8 -10" stroke="#6b4e2e" stroke-width="3" fill="none" stroke-linecap="round"/>`:''}</g>`;
+const crowd=(x0,b,n,h)=>{let s='';for(let i=0;i<n;i++){const x=x0+i*(h*.42)+(i%2)*4,y=b-(i%3)*5;s+=`<g transform="translate(${x},${y})" opacity="${.45+.15*(i%3)}"><path d="M${-h*.16},0 L${-h*.09},${-h*.6} L${h*.09},${-h*.6} L${h*.16},0Z" fill="#8f8577"/><circle cy="${-h*.72}" r="${h*.09}" fill="#b9a993"/></g>`}return s};
+const tent=(x,b,w,h)=>`<path d="M${x} ${b} L${x+w*.5} ${b-h} L${x+w} ${b}Z" fill="var(--tent)"/><path d="M${x+w*.44} ${b} L${x+w*.5} ${b-h*.5} L${x+w*.56} ${b}Z" fill="#1a140e"/><path d="M${x+w*.5} ${b-h} l0 -10" stroke="var(--tent)" stroke-width="3"/>`;
+const ground=(y,col)=>`<rect x="0" y="${y}" width="400" height="${260-y+40}" fill="${col||'#d9c7a6'}"/>`;
+const sky=(id,a,b)=>`<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="400" height="300" fill="url(#${id})"/>`;
+const furrows=(y0)=>{let s='';for(let i=0;i<6;i++)s+=`<path d="M0 ${y0+i*12} Q200 ${y0+i*12-14} 400 ${y0+i*12}" stroke="#5f7a3a" stroke-width="4" fill="none" opacity="${.35+i*.1}"/>`;return s};
+
+const _heroOld=`<defs><radialGradient id="hg" cx=".7" cy=".25" r=".8"><stop offset="0" stop-color="#f7efe0"/><stop offset="1" stop-color="#e2d2b4"/></radialGradient></defs><rect width="400" height="280" rx="14" fill="url(#hg)"/><circle cx="300" cy="70" r="26" fill="#f3d9a4" opacity=".8"/>${tent(30,205,150,120)}${ground(200,'#d3bf99')}<ellipse cx="250" cy="226" rx="120" ry="10" fill="#bfa97f" opacity=".6"/>${five(180,222,34,92,true)}`;
+
+const pages=[
+ {t:'광야의 장막에 다섯 자매가 살았어요. 하나, 말라. 둘, 노아. 셋, 호글라. 넷, 밀가. 다섯, 디르사. 아버지 슬로브핫은 광야에서 세상을 떠났어요.',
+  s:()=>sky('s1','#f6ead2','#e8d5b0')+tent(40,200,140,115)+ground(196)+five(200,220,34,84)},
+ {t:'드디어 약속의 땅! 집집마다 땅을 나눈대요. 그런데… 땅은 아들에게만 간대요. 다섯 자매는 서로 얼굴을 쳐다보았어요.',
+  s:()=>sky('s2','#eef2e4','#dfe6cc')+ground(150,'#cdd8b0')+furrows(165)+`<g stroke="#2a241d" stroke-width="2" stroke-dasharray="6 5" fill="none"><path d="M130 150 L120 260"/><path d="M270 150 L285 260"/></g>`+man(80,250,70,'#4a4038')+man(200,250,66,'#5a4a3c')+man(330,250,70,'#4a4038')},
+ {t:'우리 집엔 아들이 없는데? 그럼 아버지 이름은? 우리 집 몫은? 다섯 자매는 손을 꼭 잡았어요.',
+  s:()=>sky('s3','#ece3d4','#d9cbb2')+ground(190)+`<rect x="270" y="150" width="90" height="60" rx="6" fill="none" stroke="#2a241d" stroke-width="2" stroke-dasharray="7 6"/><text x="315" y="186" text-anchor="middle" font-size="22" fill="#2a241d" font-family="Gowun Batang">?</text>`+five(60,222,40,84)},
+ {t:'다섯 자매는 회막 문 앞으로 갔어요. 모세 할아버지, 제사장님, 지도자들, 그리고 온 백성 앞에 섰어요. 다리가 후들후들. 그래도 손을 꼭 잡았어요. "우리에게도 아버지의 땅을 주세요!"',
+  s:()=>sky('s4','#f3e9d6','#e3d1ad')+`<rect x="150" y="80" width="100" height="110" fill="#efe6d6" stroke="#b9a47f"/><rect x="185" y="120" width="30" height="70" fill="#b38f52"/>`+ground(188)+crowd(20,206,9,40)+crowd(270,206,9,40)+man(170,232,72,'#4a4038',true)+man(232,232,68,'#6b5a3f')+five(120,258,40,62,true)},
+ {t:'모세 할아버지는 이 일을 하나님께 여쭈었어요. 하나님이 말씀하셨어요. "슬로브핫 딸들의 말이 옳으니." 다섯 자매는 손을 꼭 잡았어요. 이번엔 기뻐서!',
+  s:()=>`<defs><radialGradient id="s5" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#fff6dc"/><stop offset=".55" stop-color="#ecdcb6"/><stop offset="1" stop-color="#cdb791"/></radialGradient></defs><rect width="400" height="300" fill="url(#s5)"/><path d="M200 0 L120 230 L280 230Z" fill="#fff8e4" opacity=".55"/>`+ground(226,'#c9b48c')+man(200,248,96,'#4a4038',true)},
+ {t:'여러 해가 지나, 다섯 자매는 약속의 땅에서 아버지의 몫을 받았어요. 하나, 둘, 셋, 넷, 다섯. 다섯 목소리가 새 길을 냈어요.',
+  s:()=>sky('s6','#eef3e3','#d8e3c0')+`<circle cx="320" cy="60" r="24" fill="#f3d9a4"/>`+ground(160,'#c9d6a6')+furrows(170)+five(110,236,44,90,true)}
+];
+const book=document.getElementById('book');
+book.innerHTML=pages.map((p,i)=>`<div class="page" data-i="${i}"><img src="img_book_${i+1}.jpg" alt="그림동화 ${i+1}쪽 그림" loading="lazy"><div><div class="pn">${i+1} / ${pages.length}</div><div class="pt">${p.t}</div></div></div>`).join('');
+let bi=0;const bNum=document.getElementById('bNum');
+const goB=i=>{bi=Math.max(0,Math.min(pages.length-1,i));book.children[bi].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});bNum.textContent=`${bi+1} / ${pages.length}`};
+document.getElementById('bPrev').addEventListener('click',()=>goB(bi-1));
+document.getElementById('bNext').addEventListener('click',()=>goB(bi+1));
+document.getElementById('bRead').addEventListener('click',()=>{if(bookA)bookA.pause();bookA=playAudio(`b${bi+1}.mp3`)});
+book.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goB(bi+1);if(e.key==='ArrowLeft')goB(bi-1)});
+book.addEventListener('scroll',()=>{const w=book.children[0].offsetWidth+16;const i=Math.round(book.scrollLeft/w);if(i!==bi){bi=i;bNum.textContent=`${bi+1} / ${pages.length}`}},{passive:true});
+
+const sandal=(x,y,s)=>`<g transform="translate(${x},${y}) scale(${s})"><ellipse cx="-7" cy="0" rx="6" ry="15" fill="#8a6a48"/><ellipse cx="7" cy="2" rx="6" ry="15" fill="#8a6a48"/><path d="M-12 -4 L-2 -4 M2 -2 L12 -2" stroke="#4a3b2c" stroke-width="2.5"/></g>`;
+const photos=[
+ {c:'우리 집에 남은 것',h:'장막 입구에 크기가 다른 샌들 다섯 켤레를 나란히 둔다. 낮은 각도, 문 안쪽은 어둡게.',
+  s:`<rect width="200" height="200" fill="#e8dcc6"/><path d="M40 0 L100 0 L160 0 L160 120 L40 120Z" fill="#4a3b2c"/><path d="M85 120 L100 40 L115 120Z" fill="#1a140e"/><rect y="120" width="200" height="80" fill="#d3bf99"/>${sandal(30,160,.9)}${sandal(64,162,.85)}${sandal(98,163,.8)}${sandal(132,164,.75)}${sandal(166,165,.7)}`},
+ {c:'우리 몫은 어디에?',h:'지도 위로 선을 긋는 손. 칸마다 이름이 있고, 한 칸만 비어 있다.',
+  s:`<rect width="200" height="200" fill="#efe6d6"/><g stroke="#8f7e62" stroke-width="2" fill="#e2d4b9"><rect x="20" y="30" width="50" height="45"/><rect x="75" y="30" width="55" height="45"/><rect x="135" y="30" width="45" height="45"/><rect x="20" y="80" width="70" height="50"/><rect x="95" y="80" width="40" height="50" fill="none" stroke-dasharray="5 4" stroke="#2a241d"/><rect x="140" y="80" width="40" height="50"/><rect x="20" y="135" width="160" height="40"/></g><path d="M150 190 L120 120" stroke="#d9b394" stroke-width="14" stroke-linecap="round"/><path d="M120 120 L112 104" stroke="#2a241d" stroke-width="3"/>`},
+ {c:'함께 서기로 했다',h:'다섯 손을 가운데로 모아 포갠다. 위에서 내려다보며 찍는다.',
+  s:`<rect width="200" height="200" fill="#e8dcc6"/>${[0,72,144,216,288].map((a,i)=>`<g transform="rotate(${a} 100 100)"><rect x="92" y="10" width="18" height="86" rx="9" fill="${C[i]}"/><ellipse cx="101" cy="92" rx="13" ry="16" fill="#d9b394"/></g>`).join('')}<circle cx="100" cy="100" r="16" fill="#c9a17f"/>`},
+ {c:'모두 앞에서',h:'문 앞에 선 다섯 사람의 뒷모습. 문 너머로 빛이 들어오게 역광으로.',
+  s:`<rect width="200" height="200" fill="#4a3f33"/><rect x="60" y="30" width="80" height="140" fill="#f6e7c6"/><rect width="200" height="30" y="170" fill="#2f271f"/><g opacity=".95">${[0,1,2,3,4].map(i=>`<g transform="translate(${52+i*24},${178-i%2*2})"><path d="M-9 0 L-5 -36 L5 -36 L9 0Z" fill="#1d1813"/><path d="M-8 -34 Q0 -58 8 -34Z" fill="#1d1813"/></g>`).join('')}</g>`},
+ {c:'우리 땅',h:'갈아 놓은 밭고랑 위에 나란히 찍힌 다섯 사람의 발자국.',
+  s:`<rect width="200" height="200" fill="#d8c8a2"/>${[0,1,2,3,4,5,6].map(i=>`<path d="M0 ${30+i*24} Q100 ${18+i*24} 200 ${30+i*24}" stroke="#5f7a3a" stroke-width="5" fill="none" opacity=".55"/>`).join('')}${[0,1,2,3,4].map(i=>[0,1,2].map(j=>`<ellipse cx="${36+i*32+(j%2)*8}" cy="${160-j*44}" rx="5" ry="9" fill="#7a5f3e" opacity=".75"/>`).join('')).join('')}`}
+];
+document.getElementById('photos').innerHTML=photos.map((p,i)=>`<figure class="ph" style="margin:0"><img src="img_photo_${i+1}.jpg" alt="${i+1}컷 — ${p.c}" loading="lazy"><figcaption><div class="cap">${i+1}. ${p.c}</div><div class="how">${p.h}</div></figcaption></figure>`).join('');
+
+
+const synth=window.speechSynthesis;let VOICES=[];
+const loadV=()=>{try{VOICES=synth.getVoices().filter(v=>/^ko/i.test(v.lang))}catch(e){VOICES=[]}};
+if(synth){loadV();synth.onvoiceschanged=loadV}
+const EL=[['진행자','진행자 (내 음성)','차분하고 따뜻한 진행'],['리포터','Jiae','또렷하고 빠른 현장 리포터'],['말라','Sophia','침착한 낮은 톤'],['노아','Jeong-Ah','단단하고 분명한'],['호글라','Sun','차분하고 따뜻한'],['밀가','Yunhae','자연스럽고 맑은'],['디르사','JY','가장 어리고 여린'],['호글라 · 밀가 · 디르사','Sun + Yunhae + JY','세 목소리를 겹쳐 함께 외침'],['모세','Kang','낮고 느리고 무게 있는'],['그림동화 이야기꾼','Jini','다정한 이야기꾼'],['숏츠 내레이션','Han','낮고 차분한 내레이션']];
+const RT=[[0.0, 4.5], [4.85, 15.04], [15.39, 18.39], [18.74, 26.05], [26.4, 30.4], [30.75, 37.83], [38.18, 48.63], [48.98, 51.83], [52.18, 56.62], [56.97, 62.04], [62.39, 66.59], [66.94, 70.94], [71.29, 77.33], [77.68, 80.18], [80.53, 84.97], [85.32, 92.16], [92.51, 96.51], [96.86, 109.61], [109.96, 115.44], [115.79, 119.35], [119.7, 125.2]];
+const ra=new Audio('radio_full.mp3');ra.preload='auto';let raStop=null;
+const playAudio=(src)=>{const a=new Audio(src);a.play().catch(()=>{});return a};
+let bookA=null,shortA=null;
+const CAST_OLD={'진행자':['Reed',1,1,'차분하고 따뜻한 중년 남성 아나운서'],'리포터':['Flo',1.05,1.08,'또렷하고 빠른 20대 후반 여성'],'말라':['유나',.95,.95,'가장 침착한 20대 여성, 낮은 톤'],'노아':['Shelley',1,1,'단단하고 분명한 20대 여성'],'호글라 · 밀가 · 디르사':['Sandy',1.05,1,'10대 후반~20대 초반 여성 셋'],'디르사':['Sandy',1.25,.92,'가장 여린 10대 후반 여성'],'모세':['Grandpa',.9,.82,'나이 든 남성, 낮고 느린 목소리'],'이야기꾼':['유나',1.05,.9,'다정한 30대 여성 이야기꾼'],'숏츠':['Eddy',.9,.95,'낮게 속삭이듯 시작하는 20대 목소리']};
+const pickV=n=>VOICES.find(v=>v.name.includes(n))||VOICES[0]||null;
+let speakTok=0;
+const say=(text,role)=>new Promise(res=>{if(!synth){res();return}const c=CAST[role]||CAST['이야기꾼'];const u=new SpeechSynthesisUtterance(text.replace(/\([^)]*\)/g,'').trim());const v=pickV(c[0]);if(v)u.voice=v;u.lang='ko-KR';u.pitch=c[1];u.rate=c[2];u.onend=res;u.onerror=res;synth.speak(u)});
+const hush=()=>{speakTok++;try{synth&&synth.cancel()}catch(e){}};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const noVoice=el=>{if(!synth||!VOICES.length){el.textContent='이 브라우저에서 한국어 목소리를 찾지 못했습니다';return true}return false};
+const sc=[
+ ['fx','[시그널 음악 — 잔잔한 현악, 5초 뒤 낮아진다]'],
+ ['진행자','안녕하세요, 광야 라디오 「오늘의 사람들」입니다. 오늘 회막 문 앞에서 진영이 술렁일 만한 일이 있었다고 합니다. 현장 연결해 보겠습니다.'],
+ ['fx','[웅성거리는 사람들, 바람 소리]'],
+ ['리포터','네, 저는 지금 회막 문 앞에 나와 있습니다. 조금 전 이곳에 다섯 자매가 나와 모세 앞에 섰습니다.'],
+ ['fx','[발소리 — 한 걸음, 또 한 걸음, 다섯 번]'],
+ ['리포터','(작게) 다섯 자매가 손을 맞잡고 한 걸음씩 나옵니다. 맨 앞의 말라가 먼저 입을 엽니다.'],
+ ['말라','(떨리지만 또렷하게) 우리 아버지는 광야에서 죽었습니다. 고라의 무리에 들지 않았고, 자기 죄로 죽었습니다. 그런데 아버지께는 아들이 없습니다.'],
+ ['리포터','(작게) 옆에 선 노아가 이어 말합니다.'],
+ ['노아','아들이 없다고 해서, 아버지의 이름이 집안에서 지워져야 합니까?'],
+ ['리포터','(작게) 나머지 세 자매, 호글라 · 밀가 · 디르사가 함께 외칩니다!'],
+ ['호글라 · 밀가 · 디르사','(함께) 아버지의 형제들 가운데서 우리에게도 기업을 주십시오!'],
+ ['fx','[웅성거림이 커졌다가 — 갑자기 조용해진다]'],
+ ['리포터','(작은 목소리로) 모세가… 대답하지 않습니다. 이 일을 여호와 앞에 가지고 갑니다.'],
+ ['fx','[침묵 3초. 바람 소리만]'],
+ ['리포터','네, 모세가 다시 나왔습니다. 하나님의 대답을 전합니다.'],
+ ['모세','슬로브핫 딸들의 말이 옳으니, 아버지의 형제들 가운데서 그들에게 기업을 주어라.'],
+ ['fx','[환호, 손뼉, 누군가 우는 소리]'],
+ ['진행자','듣고 계신 여러분, 오늘부터 이스라엘에 새 규례가 생겼습니다. 사람이 죽고 아들이 없으면, 그 기업은 딸에게 돌아갑니다. 다섯 자매에게 소감을 들어 볼까요?'],
+ ['디르사','무서웠어요. 그래도 다섯이 함께여서 설 수 있었어요.'],
+ ['진행자','광야 라디오 「오늘의 사람들」이었습니다.'],
+ ['fx','[시그널 음악 — 크게, 그리고 끝]']
+];
+document.getElementById('script').innerHTML=sc.map(([w,t],i)=>w==='fx'?`<div class="ln fx" data-i="${i}">${t}</div>`:`<div class="ln" data-i="${i}"><span class="who">${w}<button class="pl" type="button" data-i="${i}" aria-label="${w} 대사 듣기">듣기</button></span><span>${t}</span></div>`).join('');
+document.getElementById('castT').innerHTML=EL.map(([k,v,d])=>`<tr><td>${k}</td><td>${v}</td><td>${d}</td></tr>`).join('');
+const lines=[...document.querySelectorAll('#script .ln')];const rMsg=document.getElementById('rMsg');
+const mark=i=>lines.forEach(l=>l.classList.toggle('on',+l.dataset.i===i));
+document.getElementById('script').addEventListener('click',e=>{const b=e.target.closest('.pl');if(!b)return;const i=+b.dataset.i;raStop=RT[i][1];ra.currentTime=RT[i][0];ra.play().catch(()=>{rMsg.textContent='소리를 재생하지 못했습니다'});rMsg.textContent=''});
+document.getElementById('rPlay').addEventListener('click',()=>{raStop=null;ra.currentTime=0;ra.play().then(()=>rMsg.textContent='재생 중').catch(()=>rMsg.textContent='소리를 재생하지 못했습니다')});
+document.getElementById('rStop').addEventListener('click',()=>{ra.pause();raStop=null;mark(-1);rMsg.textContent=''});
+const rBox=document.getElementById('radioBox'),rNow=document.getElementById('rNow'),rLine=document.getElementById('rLine'),rBar=document.getElementById('rBar'),rCur=document.getElementById('rCur');
+const fmt=t=>`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+ra.addEventListener('play',()=>rBox.classList.add('playing'));ra.addEventListener('pause',()=>rBox.classList.remove('playing'));
+ra.addEventListener('timeupdate',()=>{const t=ra.currentTime;rBar.style.width=(t/(ra.duration||125.5)*100)+'%';rCur.textContent=fmt(t);if(raStop!==null&&t>=raStop){ra.pause();raStop=null;mark(-1);return}const i=RT.findIndex(([a,b])=>t>=a&&t<b+0.35);if(i>=0&&!lines[i].classList.contains('on')){mark(i);rNow.textContent=sc[i][0]==='fx'?'효과음':sc[i][0];rLine.textContent=sc[i][1];if(raStop===null)lines[i].scrollIntoView({block:'nearest',behavior:'smooth'})}});ra.addEventListener('ended',()=>{mark(-1);rMsg.textContent=''});
+
+const sh=[
+ {t:3,bg:'#0f0d0a',big:'POV:<br>아들이 없는 집의 딸',sm:'아들이 없으면, 이름도 사라진다?',lay:`<div class="ly a-peek" style="width:46%;left:27%;bottom:0"><img src="ch_milcah.webp" alt=""></div>`,scr:'검은 화면, 큰 글자 — 요즘 숏츠의 "POV" 형식. 아래에서 걱정 많은 밀가가 빼꼼 올라온다'},
+ {t:7,bg:'url(bg_tent.jpg)',big:'광야,<br>아버지를 잃은 다섯 자매',sm:'민수기 27장',lay:`<div class="ly a-pop" style="width:30%;left:-3%;bottom:3%;z-index:1;animation-delay:0.4s"><span class="nm">말라</span><img src="ch_mahlah.webp" alt=""></div><div class="ly a-pop" style="width:30%;left:16%;bottom:6%;z-index:2;animation-delay:1.2000000000000002s"><span class="nm">노아</span><img src="ch_noah.webp" alt=""></div><div class="ly a-pop" style="width:30%;left:35%;bottom:2%;z-index:3;animation-delay:2.0s"><span class="nm">호글라</span><img src="ch_hoglah.webp" alt=""></div><div class="ly a-pop" style="width:30%;left:54%;bottom:6%;z-index:2;animation-delay:2.8000000000000003s"><span class="nm">밀가</span><img src="ch_milcah.webp" alt=""></div><div class="ly a-pop" style="width:30%;left:73%;bottom:3%;z-index:1;animation-delay:3.6s"><span class="nm">디르사</span><img src="ch_tirzah.webp" alt=""></div>`,scr:'광야의 장막. 다섯 자매가 한 명씩 튀어 올라오며 이름표가 붙는다'},
+ {t:10,bg:'url(bg_door.jpg)',big:'그들은 모두 앞에 섰다',sm:N.join(' · '),lay:`<div class="ly a-walk" style="left:-3%;right:-3%;bottom:3%;display:flex;justify-content:center;align-items:flex-end"><div class="ly" style="position:relative;flex:0 0 26%;margin:0 -3%;animation-delay:0.0s"><img src="ch_mahlah.webp" alt=""></div><div class="ly" style="position:relative;flex:0 0 26%;margin:0 -3%;animation-delay:0.07s"><img src="ch_noah.webp" alt=""></div><div class="ly" style="position:relative;flex:0 0 26%;margin:0 -3%;animation-delay:0.14s"><img src="ch_hoglah.webp" alt=""></div><div class="ly" style="position:relative;flex:0 0 26%;margin:0 -3%;animation-delay:0.21000000000000002s"><img src="ch_milcah.webp" alt=""></div><div class="ly" style="position:relative;flex:0 0 26%;margin:0 -3%;animation-delay:0.28s"><img src="ch_tirzah.webp" alt=""></div></div>`,scr:'회막 문 앞으로 다섯 자매가 종종걸음으로 걸어 들어와 나란히 선다'},
+ {t:8,bg:'#f2b84b',big:'"우리에게도<br>기업을 주십시오!"',sm:'(풀어 쓴 말)',lay:`<div class="burst"></div><div class="ly a-face" style="width:82%;left:9%;top:30%;opacity:0;animation-delay:0.0s"><img src="face_mahlah.webp" alt=""></div><div class="ly a-face" style="width:82%;left:9%;top:30%;opacity:0;animation-delay:0.95s"><img src="face_noah.webp" alt=""></div><div class="ly a-face" style="width:82%;left:9%;top:30%;opacity:0;animation-delay:1.9s"><img src="face_hoglah.webp" alt=""></div><div class="ly a-face" style="width:82%;left:9%;top:30%;opacity:0;animation-delay:2.8499999999999996s"><img src="face_milcah.webp" alt=""></div><div class="ly a-face" style="width:82%;left:9%;top:30%;opacity:0;animation-delay:3.8s"><img src="face_tirzah.webp" alt=""></div><div class="ly a-facein" style="width:28%;left:4%;top:30%;animation-delay:4.8s"><img src="face_mahlah.webp" alt=""></div><div class="ly a-facein" style="width:28%;left:36%;top:30%;animation-delay:4.92s"><img src="face_noah.webp" alt=""></div><div class="ly a-facein" style="width:28%;left:68%;top:30%;animation-delay:5.04s"><img src="face_hoglah.webp" alt=""></div><div class="ly a-facein" style="width:28%;left:20%;top:58%;animation-delay:5.16s"><img src="face_milcah.webp" alt=""></div><div class="ly a-facein" style="width:28%;left:52%;top:58%;animation-delay:5.279999999999999s"><img src="face_tirzah.webp" alt=""></div>`,scr:'집중선 배경. 다섯 얼굴이 하나씩 화면을 때리며 외치고, 마지막에 다섯 얼굴이 한 화면에 모인다'},
+ {t:7,bg:'url(bg_light.jpg)',big:'— 침묵 —',sm:'모세는 이 일을 여호와 앞에 아뢰었다',low:1,lay:`<div class="ly a-fz" style="width:52%;left:24%;top:30%"><img src="ch_moses_pray.webp" alt=""></div>`,scr:'정적. 밤, 위에서 내려오는 빛 아래 무릎 꿇고 기도하는 모세 — 천천히 다가간다'},
+ {t:7,bg:'url(bg_door.jpg)',big:'"슬로브핫 딸들의<br>말이 옳으니"',sm:'민수기 27:7',lay:`<div class="ly a-popin" style="width:44%;left:52%;top:27%"><img src="ch_moses_speak.webp" alt=""></div><div class="ly a-popin" style="width:100%;left:0;bottom:2%;animation-delay:.5s"><div class="a-jump"><img src="ch_sisters_cheer.webp" alt=""></div></div>`,scr:'모세가 손을 들어 대답을 전하고, 자매들이 펄쩍펄쩍 — 디르사만 얼어붙어 있다'},
+ {t:3,bg:'#0f0d0a',big:'당신이라면<br>누구 앞에 서겠습니까?',sm:'댓글로 남겨 주세요 #민수기27장',lay:`<div class="ly a-point" style="width:56%;left:22%;bottom:-6%;transform-origin:50% 40%"><img src="ch_tirzah_point.webp" alt=""></div>`,scr:'끝 질문 — 디르사가 화면 밖 시청자를 가리키며 다가온다. 검은 화면으로 끝나 첫 장면으로 다시 이어진다(반복 재생)'}
+];
+const VOL=['아들이 없으면, 이름도 사라진다?','광야. 아버지를 잃은 다섯 자매.','그들은 모두 앞에 섰다.','우리에게도 기업을 주십시오.','','슬로브핫 딸들의 말이 옳으니.','당신이라면, 누구 앞에 서겠습니까?'];let lastK=-1;
+const phone=document.getElementById('phone');
+phone.insertAdjacentHTML('beforeend',sh.map((s,i)=>`<div class="scene v2${i===0?' on':''}" style="background:${s.bg};background-size:cover;background-position:center">${s.lay}<div class="tx${s.low?' low':''}"><div class="big a-txt">${s.big}</div><div class="small">${s.sm}</div></div></div>`).join(''));
+const total=sh.reduce((a,s)=>a+s.t,0);
+let acc=0;document.getElementById('ctable').innerHTML=sh.map(s=>{const a=acc;acc+=s.t;return `<tr><td class="t">${a}–${acc}초</td><td>${s.scr}</td><td>${s.big.replace(/<br>/g,' ').replace(/<[^>]+>/g,'')}</td></tr>`}).join('');
+const scenes=[...phone.querySelectorAll('.scene')];const pbar=document.getElementById('pbar'),ptime=document.getElementById('ptime');
+let timer=null,el=0;
+const show=t=>{let a=0,k=0;for(let i=0;i<sh.length;i++){if(t>=a)k=i;a+=sh[i].t}if(timer&&k!==lastK){lastK=k;if(shortA)shortA.pause();if(k!==4)shortA=playAudio(`s${k}.mp3`)}scenes.forEach((s,i)=>s.classList.toggle('on',i===k));pbar.style.width=(Math.min(t,total)/total*100)+'%';const sec=Math.floor(Math.min(t,total));ptime.textContent=`0:${String(sec).padStart(2,'0')}`};
+const playBtn=document.getElementById('play');
+const stopIt=()=>{clearInterval(timer);timer=null;lastK=-1;playBtn.textContent='재생';if(shortA)shortA.pause()};
+playBtn.addEventListener('click',()=>{if(timer){stopIt();return}if(el>=total)el=0;playBtn.textContent='멈춤';timer=setInterval(()=>{el+=.1;show(el);if(el>=total)stopIt()},100)});
+document.getElementById('stop').addEventListener('click',()=>{stopIt();el=0;show(0)});
+
+const SL=['mahlah','noah','hoglah','milcah','tirzah'];
+const chat=[
+ ['n','공지: 다음 주, 지파별 · 집안별 땅 나누기 (진영 전체 알림)'],
+ ['d','해 질 녘'],
+ [0,'들었어? 곧 땅 나눈대. 지파별로, 집안별로','18:02'],
+ [1,'근데 아들 있는 집만이래','18:02'],
+ [2,'그럼 우리 집은?','18:03'],
+ [3,'아버지 이름도 없어지는 거야…?','18:03'],
+ [4,'가만있으면 안 될 것 같아','18:05'],
+ [0,'모세님께 말씀드리자. 다 같이','18:06'],
+ [1,'온 회중 다 보는 앞에서? 너무 떨리는데ㅠㅠ','18:06'],
+ [4,'응. 그래야 우리 집만의 일이 아니게 되잖아','18:07'],
+ ['v','투표 · 내일 아침 회막 문 앞에서 다 같이 말씀드리기',5,0],
+ [2,'만장일치ㅋㅋ 그럼 내일 아침에 만나','18:09'],
+ ['d','다음 날'],
+ [3,'모세님이 바로 대답 안 하시고 하나님께 여쭤보신대','09:41'],
+ [1,'대답 왔어!! "슬로브핫 딸들의 말이 옳으니"','10:15'],
+ [0,'우리 다섯이 해낸 거야. 아니, 하나님이 들어 주신 거야','10:16'],
+ [4,'우리 뒤에 올 딸들도 이제 이름이 안 지워져','10:16']
+];
+document.getElementById('chat').innerHTML='<div class="top">슬로브핫 자매들 (5)</div>'+chat.map(r=>{const[w,t,tm]=r;if(w==='d')return `<div class="day">${t}</div>`;if(w==='n')return `<div class="notice">${t}</div>`;if(w==='v')return `<div class="vote"><b>${t}</b><div class="vb" style="width:100%"></div>찬성 ${r[2]} · 반대 ${r[3]} · 투표 마감</div>`;return w===4?`<div class="msg me"><span class="ctime">${tm}</span><span class="bub">${t}</span></div>`:`<div class="msg"><span class="av" role="img" aria-label="${N[w]}" style="background:${C[w]} url(ch_${SL[w]}.webp)"></span><div><div class="nm">${N[w]}</div><span class="bub">${t}</span></div><span class="ctime">${tm}</span></div>`}).join('')+'<p class="nm" style="text-align:right;margin:6px 4px 0">노란 말풍선 = 디르사</p>';
+
+const cmp=[
+ ['글','마음속 목소리, 떨림. 멈춰 생각할 수 있다','장면이 안 보인다. 한 사람의 눈으로 정해진다','청년부 묵상, 다시 쓰기 활동'],
+ ['그림동화','아이 눈높이의 장면과 감정','계보와 규례의 세부. 그림이 상상을 정한다','영유아 · 유치부, 설교 도입'],
+ ['신문','사실관계, 배경, 규례를 한눈에','마음. 객관적 문체가 관점을 숨긴다','중고등부 정리하기, 리터러시 수업'],
+ ['사진','한 순간의 감정과 상징. 오래 보게 한다','대화와 내용. 캡션 없이는 다르게 읽힌다','도입, 사진 묵상, 표현 활동'],
+ ['라디오','목소리, 침묵, 긴장. 모두가 배역으로 참여','얼굴과 장면 — 그래서 말로 묘사해야 한다','낭독극, 소그룹, 여름성경학교'],
+ ['숏츠','첫 3초의 훅, 강렬한 한 문장, 끝 질문','맥락이 다 빠진다. 멈출 틈이 없다','청소년 SNS, 수련회 홍보 — 멈추고 묻기와 함께'],
+ ['단톡방','고민의 과정, 각자의 목소리','무게감. 가볍게 만들 위험','중고등부 다시 쓰기, 토론 도입'],
+ ['4컷 웹툰','칸 사이 빈칸을 읽는 사람이 채운다. 표정과 말풍선','장면을 고르고 버려야 한다','청소년 그려 보기, 주보 · 게시판'],
+ ['카드뉴스','한 장에 한 문장, 넘기는 맛, 끝 질문','계보 · 뒷이야기 · 해설이 잘린다','교회 SNS, 행사 홍보, 리터러시 수업']
+];
+document.getElementById('cmpT').innerHTML=cmp.map(r=>`<tr>${r.map((c,i)=>i?`<td>${c}</td>`:`<td><b>${c}</b></td>`).join('')}</tr>`).join('');
+
+// 4컷 웹툰
+const night=`<rect width="400" height="300" fill="#2b2219"/><circle cx="200" cy="150" r="90" fill="#6b5232" opacity=".45"/><circle cx="200" cy="168" r="7" fill="#f3c86a"/><path d="M192 176 h16 l-3 8 h-10z" fill="#8a6a48"/>`;
+const toon=[
+ {s:()=>sky('t1','#eef2e4','#dfe6cc')+ground(150,'#cdd8b0')+furrows(165)+`<g stroke="#2a241d" stroke-width="2" stroke-dasharray="6 5"><path d="M150 150 L140 260"/><path d="M260 150 L272 260"/></g>`+man(205,250,62,'#4a4038')+five(40,250,22,58),
+  cap:'기 — 광야 40년, 땅을 나누기 직전',b:[['노아','땅을 나눈대… 근데 아들 있는 집만이래.','left:8px;top:34px']]},
+ {s:()=>night+five(120,250,40,70),cap:'승 — 그날 밤, 장막 안',b:[['디르사','가만있으면 안 돼.','right:10px;top:16px'],['말라','내일, 모두 앞에서 말하자.','left:10px;top:70px']]},
+ {s:()=>pages[3].s(),cap:'전 — 회막 문 앞',b:[['다섯 자매','아들이 없다고 아버지 이름이 지워져야 합니까?','left:8px;top:30px']],fx:['웅성웅성','right:14px;top:40px']},
+ {s:()=>pages[4].s()+five(40,252,18,40)+five(286,252,18,40),cap:'결 — 그리고 대답',fx:['반짝','left:44%;top:84px'],b:[['모세','슬로브핫 딸들의 말이 옳으니.','right:8px;top:22px'],['디르사','…!','left:47%;top:33%']]}
+];
+document.getElementById('toon').innerHTML=toon.map((p,i)=>`<div class="panel"><img src="toon_${i+1}.jpg" alt="${i+1}컷 그림" loading="lazy"><span class="capbox">${p.cap}</span>${p.b.map(([w,t,pos])=>`<span class="bub2" style="${pos}">${t}<span style="display:block;font-size:11px;font-weight:400;opacity:.7">${w}</span></span>`).join('')}${p.fx?`<span class="fxw" style="${p.fx[1]}">${p.fx[0]}</span>`:''}</div>`).join('');
+
+// 카드뉴스
+const cardsD=[
+ ['#2a241d','민수기 27장','아들이 없으면<br>이름도 사라진다?','광야 40년, 땅을 나누기 직전 — 한 집안의 이야기'],
+ ['#8a5a44','등장인물','다섯 자매','말라 · 노아 · 호글라 · 밀가 · 디르사<br>아버지 슬로브핫은 광야에서 세상을 떠났고, 아들이 없었다'],
+ ['#3f5a78','그날','모두 앞에서<br>"왜요?"','회막 문 앞, 모세와 제사장 엘르아살과 지휘관들과 온 회중 앞에서 아버지 몫의 기업을 청했다'],
+ ['#5f7a3a','하나님의 대답','"슬로브핫 딸들의<br>말이 옳으니"','모세가 이 일을 여호와께 아뢰었다 (민 27:5–7)'],
+ ['#a07c2e','바뀐 것','새 규례','아들 → 아들이 없으면 딸 → 형제 → 아버지의 형제 → 가장 가까운 친족 (민 27:8–11)'],
+ ['#6b4e6e','오늘 우리에게','우리 교회에서<br>들리지 않는 목소리는?','댓글로 나눠 주세요 · 저장해 두고 분반에서<br><span style="opacity:.75">출처: 민수기 27:1–11, 여호수아 17:3–6 (개역개정)</span>']
+];
+const CIMG=['', '<div class="cimg row"><img src="ch_mahlah.webp" alt=""><img src="ch_noah.webp" alt=""><img src="ch_hoglah.webp" alt=""><img src="ch_milcah.webp" alt=""><img src="ch_tirzah.webp" alt=""></div>', '<img class="cimg" src="face_tirzah.webp" alt="">', '<img class="cimg" src="ch_moses_speak.webp" alt="">', '', '<img class="cimg" src="ch_tirzah_point.webp" alt="" style="width:38%">'];
+document.getElementById('cards').innerHTML=cardsD.map(([c,k,hh,b],i)=>`<div class="card${[2,3,5].includes(i)?' hi':''}" style="background:${c}">${CIMG[i]}<div class="k">${k}</div><div class="h">${hh}</div><div><div class="b">${b}</div><div class="pg">${i+1} / ${cardsD.length}</div></div></div>`).join('');
+
+// 단톡방 — 대화 재생
+{const box=document.getElementById('chat');let ctm=null;
+const items=()=>[...box.children].filter(x=>!x.classList.contains('top'));
+const showAll=()=>{clearTimeout(ctm);box.querySelector('.tp')?.remove();items().forEach(x=>x.classList.remove('hide','pop'))};
+const run=()=>{showAll();const its=items();its.forEach(x=>x.classList.add('hide'));box.scrollTop=0;let k=0;
+ const step=()=>{if(k>=its.length)return;const el=its[k];const isMsg=el.classList.contains('msg');
+  const reveal=()=>{box.querySelector('.tp')?.remove();el.classList.remove('hide');el.classList.add('pop');box.scrollTop=box.scrollHeight;k++;ctm=setTimeout(step,isMsg?700:500)};
+  if(isMsg&&!el.classList.contains('me')){const tp=document.createElement('div');tp.className='msg tp';tp.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';el.before(tp);box.scrollTop=box.scrollHeight;ctm=setTimeout(reveal,650)}else reveal()};
+ step()};
+document.getElementById('cPlay').addEventListener('click',run);document.getElementById('cAll').addEventListener('click',showAll);}
+// 카드뉴스 — 넘기기 점
+{const cs=document.getElementById('cards'),dots=document.getElementById('pdots');const n=cs.children.length;
+dots.innerHTML=Array.from({length:n},(_,i)=>`<i class="${i?'':'on'}"></i>`).join('');
+const cur=()=>Math.round(cs.scrollLeft/cs.clientWidth);
+cs.addEventListener('scroll',()=>{const i=cur();[...dots.children].forEach((d,j)=>d.classList.toggle('on',i===j))},{passive:true});
+const go=d=>cs.scrollTo({left:(cur()+d)*cs.clientWidth,behavior:'smooth'});
+document.getElementById('cPrev').addEventListener('click',()=>go(-1));document.getElementById('cNext').addEventListener('click',()=>go(1));}
+
+const mom=[['글','"다리가 떨렸지만 우리는 손을 잡고 함께 섰어요"','한 사람의 속마음'],['그림동화','"다리가 후들후들. 그래도 손을 꼭 잡았어요"','되풀이되는 말 · 한 장면 그림'],['신문','다섯 딸이 회막 문 앞에 나아가 아버지 몫의 기업을 달라고 청했다','육하원칙 첫 문단 · 사진 캡션'],['사진','문 앞에 선 다섯 뒷모습, 역광','구도와 빛 · 캡션'],['라디오','발소리 다섯 번 → 웅성거림 → 갑자기 침묵','효과음 · 리포터의 묘사'],['숏츠','외치는 다섯 얼굴이 하나씩 화면을 때리는 빠른 컷','큰 자막 · 편집 속도 · 움직임'],['단톡방','전날 밤 투표 — 찬성 5 · 반대 0','짧은 말 · 투표 기능'],['4컷 웹툰','3컷(전) — 큰 말풍선과 "웅성웅성"','칸 · 말풍선 · 효과음'],['카드뉴스','"모두 앞에서 \'왜요?\'" 한 장','한 장 한 문장']];
+document.getElementById('momT').innerHTML=mom.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+document.getElementById('nph').innerHTML=`<img src="img_book_4.jpg" alt="회막 문 앞 장면"><figcaption>회막 문 앞에 선 다섯 자매. 모세와 제사장 엘르아살, 지휘관들과 온 회중이 지켜보았다. (그림: 시연용)</figcaption>`;
+const caps=['모두 앞에 선 용기 — 다섯 자매, 회막 문 앞에서','전통을 거스른 딸들? 진영이 술렁였다','혼자였다면 서지 못했을 자리'];
+document.getElementById('capPh').innerHTML=`<img src="img_photo_4.jpg" alt="문 앞에 선 다섯 사람의 뒷모습">`;
+const capTxt=document.getElementById('capTxt');capTxt.textContent=caps[0];
+document.getElementById('capBtns').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;capTxt.textContent=caps[+b.dataset.c];[...e.currentTarget.children].forEach(x=>x.classList.toggle('pri',x===b))});
+
+const ids=['geul','donghwa','sinmun','sajin','radio','shorts','dantok','webtoon','card','gyeonju'];
+const tabs=[...document.querySelectorAll('#tabs a')];
+const route=()=>{const h=location.hash.slice(1);const id=ids.includes(h)?h:'geul';ids.forEach(x=>document.getElementById('v-'+x).classList.toggle('on',x===id));tabs.forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+id?'true':'false'));if(id!=='shorts')stopIt();if(id!=='radio'){ra.pause();mark(-1)}if(id!=='donghwa'&&bookA)bookA.pause()};
+window.addEventListener('hashchange',()=>{route();document.querySelector('nav.tabs').scrollIntoView({block:'start'})});route();
+}
+</script>
+</body>
+</html>
